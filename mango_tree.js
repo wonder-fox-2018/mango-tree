@@ -5,12 +5,12 @@
 class MangoTree {
 
   // Initialize a new MangoTree
-  constructor (age, height, fruits, harvested, healthStatus) {
-    this._age = age;
-    this._height = height;
-    this._fruits = fruits;
-    this._harvested = harvested;
-    this._healthStatus = healthStatus
+  constructor () {
+    this._age = 0;
+    this._height = 0;
+    this._fruits = [];
+    this._harvested = 0;
+    this._healthStatus = true
   }
 
   set age(age) {
@@ -57,24 +57,50 @@ class MangoTree {
 
   // Grow the tree
   grow () {
+    this._berbuah = 3
+    this._mati = 10
+    this._tumbuh = 6
+    this._age += 1
+    if (this._age === this._mati) this._healthStatus = false
+    if (this._age < this._tumbuh) var ukuranTumbuh = Math.random()*10
+    this._height += ukuranTumbuh;
   }
 
   // Produce some mangoes
   produceMangoes () {
+    if (this._age >= this._berbuah){
+      var qtt = Math.random()*5
+      for (var i = 0; i < qtt; i++) {
+        this._fruits.push(new Mango())
+      }
+    }
   }
 
   // Get some fruits
   harvest () {
+    if (this._age >= this._tumbuh){
+      var bad = 0;
+      var good = 0;
+      var count = 0;
+      for (var i = 0; i < this._fruits.length; i++) {
+        if (this.fruits[1].qtt == 'bad') bad++
+        if (this.fruits[1].qtt == 'good') good++
+        count++     
+      }
+      this.fruits = []
+      return `${count} good: ${good} bad: ${bad}`
+    }
+    return '0'
   }
 
 }
 
-class Mango extends MangoTree{
+class Mango{
   // Produce a mango
-  constructor (quality=Math.random(0) * 1) {
-    super(age, height, fruits, harvested, healthStatus)
-    this.quality = quality
+  constructor(){
+    Math.round(Math.random()*1)
   }
+  
 }
 
 
