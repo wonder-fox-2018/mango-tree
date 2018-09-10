@@ -9,9 +9,9 @@ class FruitTree {
     this._fruits = [];
     this._harvested = "";
     this._healthStatus;
-    this.mature = 4;
-    this.maxHeight = 3;
-    this.ageDeath = 10;
+    this.mature = 0;
+    this.maxHeight = 0;
+    this.ageDeath = 0;
   }
   get age() {
     return this._age;
@@ -40,7 +40,7 @@ class FruitTree {
       if (r + this._height >= this.maxHeight)
         this._height = this.maxHeight;
       else
-        this._height = parseFloat(this._height+r).toFixed(1);
+        this._height = parseFloat((this._height+r).toFixed(1));
     }
   }
 
@@ -77,15 +77,22 @@ class Fruit {
 }
 
 class MangoTree extends FruitTree{
+    constructor(){
+        super();
+        this.mature = 5;
+        this.maxHeight = 3;
+        this.ageDeath = 15;
+
+    }
     produceMangoes(){
         super.produceTrees();
     }
 }
 
-class Mango {
+class Mango extends Fruit{
     // Produce a mango
     constructor() {
-      this.quality = r_quality[Math.floor(Math.random() * r_quality.length)];
+      super();
     }
   }
 
@@ -103,6 +110,12 @@ do {
 
 // Release 1
 class AppleTree extends FruitTree {
+    constructor(){
+        super();
+        this.mature = 5;
+        this.maxHeight = 3;
+        this.ageDeath = 15;
+    }
     produceApples(){
         super.produceTrees();
     }

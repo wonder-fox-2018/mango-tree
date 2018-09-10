@@ -1,7 +1,7 @@
 "use strict"
 
 // Release 0
-const r_heigth = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1];
+const r_heigth = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9];
 class MangoTree {
 
   // Initialize a new MangoTree
@@ -54,10 +54,9 @@ class MangoTree {
       if (r + this._height >= this.maxHeight)
         this._height = this.maxHeight;
       else
-        this._height = parseFloat(this._height+r).toFixed(1);
+        this._height = parseFloat((this._height+r).toFixed(1));
     }
-
-
+    
   }
 
   // Produce some mangoes
