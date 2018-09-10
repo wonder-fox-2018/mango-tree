@@ -7,11 +7,11 @@ class MangoTree {
   // Initialize a new MangoTree
   constructor () {
     this._age = 0,
-    this._mature_height = 10
-    this._max_age = 20
+    this._mature_height = 10,
+    this._max_age = 20,
     this._height = 0,
-    this._fruits = fruits,
-    this._healthStatus = 20,
+    this._fruits = [],
+    this._healthStatus = false,
     this._harvested = 0
   }
 
@@ -19,7 +19,7 @@ class MangoTree {
     return this._age
   }
   set age (age) {
-    this.age += age
+    this._age += age;
   }
 
   get height () {
@@ -27,7 +27,7 @@ class MangoTree {
 
   }
   set height (height) {
-    this.height += height
+    this._height += height
   }
 
   get fruits () {
@@ -56,7 +56,6 @@ class MangoTree {
 
   // Grow the tree
   grow () {
-    this.mature_height = 
     if (this._age < 20) {
       this.age = 1
     }
@@ -64,20 +63,40 @@ class MangoTree {
       var heightTree = this.randomNum();
       this.height = heightTree;
     }
+    if ( this.age === this._max_age) {
+      thies._healthStatus = false;
+    }
 
   }
 
   // Produce some mangoes
   produceMangoes () {
-    for ( var i = 0; i < 12; i++) {
-
+    console.log(this.fruits)
+    if ( this._age >= this._mature_height) {
+      var randomFruits = this.randomFruit();
     }
 
   }
 
   // Get some fruits
   harvest () {
-
+    if ( this._age >= this._mature_height) {
+      var good = 0;
+      var bad = 0;
+      var total = 0;
+      for ( var i = 0; i < this._fruits.lenght;i++) {
+        total += 1
+        if (this._fruits[i].quality === 'good') {
+          good += 1;
+        }
+        else {
+          bad += 1;
+        }
+      }
+      this.fruits = []
+      return `${total} (${good} good, ${bad} bad`
+    }
+    return 0
   }
 
   randomNum() {
@@ -86,7 +105,7 @@ class MangoTree {
   }
 
   randomFruit() {
-    var randomFruit = Math.ceil(Math.random() * 12)
+    var randomFruit = Math.floor(Math.random() * 12)
     return randomFruit
   }
 
