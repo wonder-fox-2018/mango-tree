@@ -48,8 +48,8 @@ class Fruit {
     }
 }
 
-// Release 0
 
+// Release 0
 class MangoTree extends FruitTree {
     // Initialize a new MangoTree
     constructor () {
@@ -73,8 +73,9 @@ class MangoTree extends FruitTree {
         if (this.age >= this.stopGrowing) {
             this.height = beforeHeight;
         } else {
-            var randomGrowth = Number(Math.random().toFixed(1));
+            var randomGrowth = Math.random();
             this.height = this.height + randomGrowth;
+            this.height = Number(this.height.toFixed(1));
         }
     }
 
@@ -108,12 +109,14 @@ do {
 } while (mangoTree.healthStatus !== false);
 
 console.log('');
+
+
 // Release 1
 class AppleTree extends FruitTree {
     // Initialize a new MangoTree
     constructor () {
         super();
-        this.maturedAge = 1;
+        this.maturedAge = 3;
         this.stopGrowing = 15;
         this.deceased = 20;
     }
@@ -132,8 +135,9 @@ class AppleTree extends FruitTree {
         if (this.age >= this.stopGrowing) {
             this.height = beforeHeight;
         } else {
-            var randomGrowth = Number(Math.random().toFixed(1));
+            var randomGrowth = Math.random();
             this.height = this.height + randomGrowth;
+            this.height = Number(this.height.toFixed(1));
         }
     }
 
@@ -163,3 +167,61 @@ do {
     console.log(`[Year ${appleTree.age} Report] Height = ${appleTree.height} m | Fruits harvested = ${appleTree.harvested} ${appleTree.harvest()}`);
     appleTree.setFruitsAndHarvested();
 } while (appleTree.healthStatus !== false);
+console.log('');
+
+// Release 2
+class PearTree extends FruitTree {
+    // Initialize a new MangoTree
+    constructor () {
+        super();
+        this.maturedAge = 5;
+        this.stopGrowing = 25;
+        this.deceased = 25;
+    }
+
+    // Get current states here
+
+    // Grow the tree
+    grow () {
+        this.age = this.age + 1;
+        var beforeHeight = this.height;
+        
+        if (this.age === this.deceased) {
+            this.healthStatus = false;
+        }
+
+        if (this.age >= this.stopGrowing) {
+            this.height = beforeHeight;
+        } else {
+            var randomGrowth = Math.random();
+            this.height = this.height + randomGrowth;
+            this.height = Number(this.height.toFixed(1));
+        }
+    }
+
+    // Produce some mangoes
+    produceMangoes () {
+        if (this.age >= this.maturedAge) {
+            var randomProduce = Math.round(Math.random() * 8);
+            for (var i = 0; i < randomProduce; i++) {
+                var pear = new Pear();
+                this.fruits.push(pear);
+            }
+        }
+    }
+}
+
+class Pear extends Fruit{
+    // Produce a pear
+}
+
+var pearTree = new PearTree();
+
+console.log('Pear Tree Growth');
+do {
+    pearTree.grow();
+    pearTree.produceMangoes();
+    pearTree.harvest();
+    console.log(`[Year ${pearTree.age} Report] Height = ${pearTree.height} m | Fruits harvested = ${pearTree.harvested} ${pearTree.harvest()}`);
+    pearTree.setFruitsAndHarvested();
+} while (pearTree.healthStatus !== false);
