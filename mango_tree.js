@@ -1,67 +1,116 @@
 "use strict"
+const TreeClass = require('./tree.js');
+const FruitTree = TreeClass.FruitTree;
+const Fruit = TreeClass.Fruit;
 
-// Release 0
 
-class MangoTree {
 
-  // Initialize a new MangoTree
+class MangoTree  extends FruitTree {
   constructor () {
+    super();
+    this._matureAge = 10;
+    this._ageLimit = 20;
   }
 
-  get age () {
-  }
-
-  get height () {
-
-  }
-
-  get fruits () {
-  }
-
-  get healthStatus () {
-  }
-
-  get harvested () {
-
-  }
-
-  // Get current states here
-
-  // Grow the tree
-  grow () {
-  }
-
-  // Produce some mangoes
-  produceMangoes () {
-  }
-
-  // Get some fruits
-  harvest () {
-  }
-
-}
-
-class Mango {
-  // Produce a mango
-  constructor () {
+  produceMangoes() {
+    let quality = ['good', 'bad'];
+  
+    let numberOfFruits = this.randomIntFromInterval(1,30);
+  
+    for (let i = 0; i < numberOfFruits; i++) {
+        let randomQuality = this.getRandomDecimal() > 0.5 ? quality[0] : quality[1];
+        //console.log(randomQuality);
+        let fruit = new Mango(randomQuality);
+        this.fruits.push(fruit);
+    } 
   }
 }
 
-/**
-  * driver code untuk release 0
-  * let mangoTree = new MangoTree()
-  * do {
-  *   mangoTree.grow();
-  *   mangoTree.produceMangoes();
-  *   mangoTree.harvest();
-  *   console.log(`[Year ${tree.age} Report] Height = ${tree.height} | Fruits harvested = ${tree.harvested}`)
-  * } while (mangoTree.healthStatus != false)
-  */
+class Mango extends Fruit  {
+  
+}
+
+
+
+let tree = new MangoTree()
+do {
+  debugger;
+  tree.grow();
+  tree.produceMangoes();
+  tree.harvest();
+  //console.log(tree.fruits);
+  console.log(`[Year ${tree.age} Report] Height = ${tree.height} | Fruits harvested = ${tree.harvested}`)
+  debugger;
+} while (tree.healthStatus != false)
+ 
 
 // Release 1
-class AppleTree {}
-class Apple {}
+class AppleTree extends FruitTree {
+  constructor() {
+    super();
+    this._matureAge = 5;
+    this._ageLimit = 8;
+  }
 
-// Release 2
-class FruitTree {}
-class Fruit {}
+  produceApples() {
+    let quality = ['good', 'bad'];
+  
+    let numberOfFruits = this.randomIntFromInterval(1,10);
+  
+    for (let i = 0; i < numberOfFruits; i++) {
+        let randomQuality = this.getRandomDecimal() > 0.5 ? quality[0] : quality[1];
+        
+        let fruit = new Apple(randomQuality);
+        this.fruits.push(fruit);
+    } 
+  }
+}
+    
+    
+class Apple extends Fruit{
+
+}
+
+console.log('apple tree test:');
+let appleTree = new AppleTree();
+ do {
+  appleTree.grow();
+  appleTree.produceApples();
+  appleTree.harvest();
+  console.log(`[Year ${appleTree.age} Report] Height = ${appleTree.height} | Fruits harvested = ${appleTree.harvested}`)
+} while (appleTree.healthStatus != false)
+
+class PearTree extends FruitTree {
+  constructor() {
+    super();
+    this._matureAge = 8;
+    this._ageLimit = 20;
+  }
+
+  producePears() {
+    let quality = ['good', 'bad'];
+  
+    let numberOfFruits = this.randomIntFromInterval(6,9);
+  
+    for (let i = 0; i < numberOfFruits; i++) {
+        let randomQuality = this.getRandomDecimal() > 0.5 ? quality[0] : quality[1];
+        
+        let fruit = new Pear(randomQuality);
+        this.fruits.push(fruit);
+    } 
+  }
+}
+
+class Pear extends Fruit {
+
+}
+
+console.log('pear tree test:');
+let pearTree = new PearTree();
+ do {
+  pearTree.grow();
+  pearTree.producePears();
+  pearTree.harvest();
+  console.log(`[Year ${pearTree.age} Report] Height = ${pearTree.height} | Fruits harvested = ${pearTree.harvested}`)
+} while (pearTree.healthStatus != false)
+
