@@ -35,9 +35,7 @@ class MangoTree {
     return this._harvested;
   }
 
-  // Get current states here
-
-  // Grow the tree
+  
   grow () {
     if(this._age < this._ageDie) {
       this._age++;
