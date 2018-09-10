@@ -83,8 +83,8 @@ class MangoTree {
       var good = 0;
       var count = 0;
       for (var i = 0; i < this._fruits.length; i++) {
-        if (this.fruits[1].qtt == 'bad') bad++
-        if (this.fruits[1].qtt == 'good') good++
+        if (this.fruits[1].quality == 'bad') bad++
+        if (this.fruits[1].quality == 'good') good++
         count++     
       }
       this.fruits = []
@@ -98,14 +98,16 @@ class MangoTree {
 class Mango{
   // Produce a mango
   constructor(){
-    Math.round(Math.random()*1)
+    var quality = Math.round(Math.random()*1)
+    if (quality === 0) this.quality = 'bad'
+    if (quality === 1) this.quality = 'good'
   }
   
 }
 
 
   //* //driver code untuk release 0
-  let mangoTree = new MangoTree(1, 2, 'fruits', 33, 1)
+  let mangoTree = new MangoTree()
    do {
      mangoTree.grow();
      mangoTree.produceMangoes();
