@@ -4,7 +4,6 @@
 
 class MangoTree {
   
-  // Initialize a new MangoTree
   constructor () {
     this.waktuBerbuah = 4
     this.berhentiTumbuh = 10
@@ -40,33 +39,34 @@ class MangoTree {
 
 
   harvest () {
-    let hitungBagus = 0
-    let hitungJelek = 0
     if(this.umur >= this.waktuBerbuah){
+      let hitungBagus = 0
+      let hitungJelek = 0
+      let count=0
+     
      for (let i = 0; i < this.jumlahBuah.length; i++) {
-       if (this.jumlahBuah[i].kualitas === bagus) {
-         this.hitungBagus +=1
+       count +=1
+       if (this.jumlahBuah[i].kualitasBuah === 'bagus') {
+         hitungBagus +=1
        } else {
-          this.hitungJelek +=1
+          hitungJelek +=1
        } 
      }
-    }
-    return 'Total Buah ' + this.jumlahBuah.length + ',Buah bagus = ' + hitungBagus
+     this.jumlahBuah=[]
+     return 'Total Buah ' +count+ ',Buah bagus = ' + hitungBagus
     + ',Buah jelek , ' + hitungJelek
+    }
+    return 0
+    
   }
-
   produceMangoes () {
     if (this.umur >= this.waktuBerbuah) {
-      let acakJumlahBuah = Math.random() * 10
+      let acakJumlahBuah = Math.floor(Math.random() * 10)+1
       for (let i = 0; i < acakJumlahBuah; i++) {
         this.jumlahBuah.push(new Mango())
       }
     }
   }
-
-  // Get current states here
-
-  // Grow the tree
   grow () {
    this.waktuMati = 17
    this.waktuBerbuah = 4
@@ -76,30 +76,22 @@ class MangoTree {
      this.kesehatan = false
    }
    if (this.umur < this.berhentiTumbuh){
-    let acakPertumbuhan = Math.random() * 10
+    let acakPertumbuhan = Number((Math.random() * 10).toFixed(1))
     this.tinggi += acakPertumbuhan
   }
-
-  // Produce some mangoes
-  
-
-  // Get some fruits
-  
-
 }
 }
 
 class Mango {
   constructor(){
-    this.kualitasBuah = null
     let acakKualitasBuah = Math.round(Math.random()) 
     if (acakKualitasBuah === 0) {
       this.kualitasBuah = 'bagus'
     } else {
       this.kualitasBuah = 'jelek'
     }
+    //console.log(this.kualitasBuah,acakKualitasBuah)
   }
-
 }
 
 
@@ -108,9 +100,9 @@ class Mango {
    do {
      pohonMangga.grow();
      pohonMangga.produceMangoes();
-     pohonMangga.harvest();
-     console.log(`[Year ${pohonMangga.age} Report] Height = ${pohonMangga.height} | Fruits harvested = ${pohonMangga.harvested}`)
-   } while (mangoTree.kesehatan != false)
+     let hasil=pohonMangga.harvest();
+     console.log(`[Year ${pohonMangga.umur} Report] Height = ${pohonMangga.tinggi} | Fruits harvested = ${hasil}`)
+   } while (pohonMangga.kesehatan !== false)
   
 // Release 1
 class AppleTree {}
