@@ -1,7 +1,7 @@
 "use strict"
 
 // Release 0
-
+/*
 class MangoTree {
 
   // Initialize a new MangoTree
@@ -125,7 +125,7 @@ class Mango {
 }
 
 
-  //driver code untuk release 0
+//driver code untuk release 0
 let mangoTree = new MangoTree()
 console.log(`The tree is alive! :smile:`)
 do {
@@ -271,10 +271,180 @@ do {
 } while (appleTree.healthStatus != false)
   console.log(`The tree has met its end . :sad:`)
 
+*/
 // Release 2
 class FruitTree {
-  constructor(){
+  constructor () {
+    this._umur = 0
+    this.tinggi = 0
+    this._buahYangAda = []
+    this.buahYangDipetik = 0
+    this.kesehatanBuah = true
+    this.umurMati = 0
+  }
 
+  set fruits (arrHasil){
+    this._buahYangAda =  arrHasil
+  }
+
+  get fruits (){
+    return this._buahYangAda
+  }
+  set age (umurSementara){
+    this._umur = umurSementara
+  }
+
+  get age (){
+    return this._umur
+  }
+
+  get healthStatus () {
+    return this.kesehatanBuah
+  }
+
+  set healthStatus (kesehatanSekarang){
+    this.kesehatanBuah=kesehatanSekarang
+  }
+
+  grow (){
+    let umurSementara = this.age + 1
+    this.age = umurSementara
+    //batasan tumbuh
+    if (this.age<this.batasanTumbuh){
+      let tinggiSekarang = this.height
+      tinggiSekarang += Math.floor(Math.random()*4)
+      this.height=tinggiSekarang //balikin ke setter
+    }
+    //kondisi mati
+    if (this._umur === this.umurMati){
+      let kesehatanSekarang = this.kesehatanBuah
+      kesehatanSekarang = false
+      this.healthStatus=kesehatanSekarang//balikin ke setter
+    }
+  }
+  
+  get height(){
+    return this.tinggi
+  }
+
+  set height(tinggiSekarang){
+    this.tinggi = tinggiSekarang
+  }
+
+  produceFruits () {
+    if (this.age>=this.umurDewasa){
+      let acakJumlahBuah=Math.floor(Math.random()*this.batasanTumbuh)
+      let arrHasil=[]
+      for (let i=0; i<acakJumlahBuah; i++){
+        let fruitObj = new Fruit()
+        arrHasil.push(fruitObj)
+      }
+      this.fruits=arrHasil //masukkan ke setter fruits
+    }
+  }
+
+  harvest () {
+    let fruitBad = 0
+    let fruitGood = 0
+    if (this.age>=this.umurDewasa){
+      for (let i=0; i<this.fruits.length; i++){
+        if (this.fruits[i]['kualitasBuah']==='Bad'){
+          fruitBad+=1
+        } else {
+          fruitGood+=1
+        }
+      }
+      let hasilPanen = `${fruitGood+fruitBad} (${fruitGood} ${this.namaBuah} Good, ${fruitBad} ${this.namaBuah} Bad)`
+      this.harvested = hasilPanen
+    }
+    else {
+      this.harvested = 0
+    }
   }
 }
-class Fruit {}
+
+class Fruit {
+  constructor(){
+    let acakStatus=Math.round(Math.random()*2)
+    if (acakStatus===0){
+      this.kualitasBuah='Bad'
+    } else {
+      this.kualitasBuah='Good'
+    }
+  }
+}
+
+//------------------------Membuat mango tree---------------------//
+class Manggo extends FruitTree {
+  constructor(){
+    super()
+    this.namaBuah = "Mango"
+  }
+
+  grow(){
+    super.grow()
+    this.batasanTumbuh = 10
+    this.umurDewasa=7
+    this.umurMati = 13
+  }
+}
+
+let manggo = new Manggo()
+console.log(`The tree is alive! :smile:`)
+do {
+  manggo.grow();
+  manggo.produceFruits();
+  manggo.harvest();
+  console.log(`[Year ${manggo.age} Report] Height = ${manggo.height} | Fruits harvested = ${manggo.harvested}`)
+} while (manggo.healthStatus != false)
+  console.log(`The tree has met its end . :sad:`)
+
+//------------------------Membuat apple tree---------------------//
+class Apple extends FruitTree {
+  constructor(){
+    super()
+    this.namaBuah = "Apple"
+  }
+
+  grow(){
+    super.grow()
+    this.batasanTumbuh = 12
+    this.umurDewasa = 8
+    this.umurMati = 14
+  }
+} 
+
+let apple = new Apple()
+console.log(`The tree is alive! :smile:`)
+do {
+  apple.grow();
+  apple.produceFruits();
+  apple.harvest();
+  console.log(`[Year ${apple.age} Report] Height = ${apple.height} | Fruits harvested = ${apple.harvested}`)
+} while (apple.healthStatus != false)
+  console.log(`The tree has met its end . :sad:`)
+
+//------------------------Membuat pear tree---------------------//
+class Pear extends FruitTree {
+  constructor(){
+    super()
+    this.namaBuah = "Pear"
+  }
+
+  grow(){
+    super.grow()
+    this.batasanTumbuh = 10
+    this.umurDewasa = 5
+    this.umurMati = 12
+  }
+} 
+
+let pear = new Pear()
+console.log(`The tree is alive! :smile:`)
+do {
+  pear.grow();
+  pear.produceFruits();
+  pear.harvest();
+  console.log(`[Year ${pear.age} Report] Height = ${pear.height} | Fruits harvested = ${pear.harvested}`)
+} while (pear.healthStatus != false)
+  console.log(`The tree has met its end . :sad:`)
