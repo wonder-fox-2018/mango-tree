@@ -101,11 +101,11 @@ class MangoTree {
       for (let i=0; i<this.fruits.length; i++){
         if (this.fruits[i]['kualitasMangga']==='Bad'){
           mangoBad+=1
-        } else {
+        } else if (this.fruits[i]['kualitasMangga']==='Good'){
           mangoGood+=1
         }
       }
-      let hasilPanen = `${mangoGood} Mangga Good, ${mangoBad} Mangga Bad`
+      let hasilPanen = `${mangoGood+mangoBad} (${mangoGood} Mangga Good, ${mangoBad} Mangga Bad)` 
       this.harvested = hasilPanen
     }
   }
@@ -115,26 +115,28 @@ class MangoTree {
 class Mango {
   // Produce a mango
   constructor(){
-    let acakStatus=Math.round(Math.random())
+    let acakStatus=Math.round(Math.random()*2)
     if (acakStatus===0){
       this.kualitasMangga='Bad'
-    } else {
+    } else if (acakStatus===1){
       this.kualitasMangga='Good'
-    }
+    } 
   }
 }
 
 
   //driver code untuk release 0
 let mangoTree = new MangoTree()
+console.log(`The tree is alive! :smile:`)
 do {
   mangoTree.grow();
   mangoTree.produceMangoes();
   mangoTree.harvest();
   console.log(`[Year ${mangoTree.age} Report] Height = ${mangoTree.height} | Fruits harvested = ${mangoTree.harvested}`)
 } while (mangoTree.healthStatus != false)
+  console.log(`The tree has met its end . :sad:`)
 
-/*
+
 // Release 1
 class AppleTree {
   // Initialize a new AppleTree
@@ -193,8 +195,8 @@ class AppleTree {
   grow () {
     let umurSementara = this.age + 1
     this.age= umurSementara //balikin ke setter
-    this.batasanTumbuh = 10
-    this.umurDewasa=7
+    this.batasanTumbuh = 13
+    this.umurDewasa=9
     //batasan tumbuh
     if (this.age<this.batasanTumbuh){
       let tinggiSekarang = this.height
@@ -202,7 +204,7 @@ class AppleTree {
       this.height=tinggiSekarang //balikin ke setter
     }
     //kondisi mati
-    if (this.age === 13){
+    if (this.age === 17){
       let kesehatanSekarang = this.kesehatanBuah
       kesehatanSekarang = false
       this.healthStatus=kesehatanSekarang//balikin ke setter
@@ -232,13 +234,13 @@ class AppleTree {
     let AppleGood = 0
     if (this.age>=this.umurDewasa){
       for (let i=0; i<this.fruits.length; i++){
-        if (this.fruits[i]['kualitasMangga']==='Bad'){
+        if (this.fruits[i]['kualitasApple']==='Bad'){
           AppleBad+=1
         } else {
           AppleGood+=1
         }
       }
-      let hasilPanen = `${AppleGood} Apel Good, ${AppleBad} Apel Bad`
+      let hasilPanen = `${AppleGood+AppleBad} (${AppleGood} Apel Good, ${AppleBad} Apel Bad)`
       this.harvested = hasilPanen
     }
   }
@@ -249,7 +251,7 @@ class AppleTree {
 class Apple {
     // Produce a Apple
     constructor(){
-      let acakStatus=Math.round(Math.random())
+      let acakStatus=Math.round(Math.random()*2)
       if (acakStatus===0){
         this.kualitasApple='Bad'
       } else {
@@ -260,13 +262,19 @@ class Apple {
 }
 //driver code untuk release 0
 let appleTree = new AppleTree()
+console.log(`The tree is alive! :smile:`)
 do {
   appleTree.grow();
   appleTree.produceApplees();
   appleTree.harvest();
   console.log(`[Year ${appleTree.age} Report] Height = ${appleTree.height} | Fruits harvested = ${appleTree.harvested}`)
 } while (appleTree.healthStatus != false)
-*/
+  console.log(`The tree has met its end . :sad:`)
+
 // Release 2
-class FruitTree {}
+class FruitTree {
+  constructor(){
+
+  }
+}
 class Fruit {}
